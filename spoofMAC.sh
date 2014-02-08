@@ -1,7 +1,8 @@
 #!/bin/bash
-#Written by: Adam Walsh
+#Written by: Adam Walsh 2013
 #Spoof your MAC Address!
-#Maintained @ 
+#Maintained @ https://github.com/walshie4/spoofMac
+
 sudo ipconfig set en0 BOOTP
 sudo ipconfig set en0 DHCP
 echo Please enter MAC to be spoofed:
