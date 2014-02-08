@@ -3,13 +3,14 @@
 #Spoof your MAC Address!
 #Maintained @ https://github.com/walshie4/spoofMac
 
-sudo ipconfig set en0 BOOTP
-sudo ipconfig set en0 DHCP
-echo Please enter MAC to be spoofed:
-read addr
-sudo ifconfig en1 ether $addr
-sudo ifconfig en0 ether $addr
-sudo ifconfig en1 lladdr $addr
-sudo ifconfig en0 lladdr $addr
+declare -a devices=("en0") #CONFIG HERE - Put names of network interfaces to set their link-level address
+
+echo 'Please quit out of System Preferences if it is open.'
+read -p "Please enter MAC address to be spoofed (XX:XX:XX:XX:XX:XX): " addr
+for INTERFACE in ${devices[@]}
+do
+    /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -z #Disassociate from all networks
+    sudo ifconfig $INTERFACE lladdr $addr
+done
 ifconfig | grep ether
 echo Done!
