@@ -5,6 +5,10 @@
 
 declare -a devices=("en0") #CONFIG HERE - Put names of network interfaces to set their link-level address
 
+if [ ${#devices[@]} -eq 0 ]; then
+    echo "Please modify the devices list in the file 'spoofMAC.sh' to include at least one network interface"
+    exit 1
+fi
 echo 'Please quit out of System Preferences if it is open.'
 read -p "Please enter MAC address to be spoofed (XX:XX:XX:XX:XX:XX): " addr
 for INTERFACE in ${devices[@]}
